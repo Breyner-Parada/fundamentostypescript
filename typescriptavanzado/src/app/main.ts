@@ -20,7 +20,7 @@ for (let index = 0; index < 50; index++) {
 console.log(products);
 
 const product = products[0];
-updateProduct(product.id as string, {
+updateProduct(product.id, {
   title: 'New Title',
   stock: 45
 });
