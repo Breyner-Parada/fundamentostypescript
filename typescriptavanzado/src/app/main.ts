@@ -1,9 +1,28 @@
-import {addProduct} from './products/products.service';
+import {faker} from '@faker-js/faker';
+import {addProduct, findProduct, products, updateProduct} from './products/products.service';
 
-addProduct({
-  id: 'product',
-  title: 'Product',
-  updatedAt: new Date(),
-  createdAt: new Date(),
-  stock: 6
-})
+
+for (let index = 0; index < 50; index++) {
+  addProduct({
+    title: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
+    image: faker.image.imageUrl(),
+    color: faker.color.human(),
+    sizes: faker.helpers.arrayElement(['S', 'M', 'L']),
+    price: parseInt(faker.commerce.price(), 10),
+    isNew: faker.datatype.boolean(),
+    tags: faker.helpers.arrayElements(),
+    stock: Number(faker.random.numeric(2)),
+    category_id: faker.datatype.uuid(),
+  });
+}
+
+console.log(products);
+
+const product = products[0];
+updateProduct(product.id as string, {
+  title: 'New Title',
+  stock: 45
+});
+
+findProduct();
