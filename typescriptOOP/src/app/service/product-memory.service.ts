@@ -1,10 +1,11 @@
 import {Product} from '../models/product.model';
 import {CreateProductDto, UpdateProductDto} from '../dtos/product.dto';
 import { faker } from '@faker-js/faker';
+import { ProductService } from '../models/product.service.model';
 export const products: Product[] = [];
 
 
-export class ProductMemoryService {
+export class ProductMemoryService implements ProductService {
 
   create(data: CreateProductDto): Product {
     const newProduct = {
@@ -22,6 +23,10 @@ export class ProductMemoryService {
   add(product: Product): Product {
     products.push(product);
     return product;
+  }
+
+  getAll() {
+    return products;
   }
 
   update(id: Product['id'], changes: UpdateProductDto): Product {
